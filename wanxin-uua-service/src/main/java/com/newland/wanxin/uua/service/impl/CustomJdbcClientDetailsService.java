@@ -1,4 +1,4 @@
-package com.newland.wanxin.uua.service;
+package com.newland.wanxin.uua.service.impl;
 
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 

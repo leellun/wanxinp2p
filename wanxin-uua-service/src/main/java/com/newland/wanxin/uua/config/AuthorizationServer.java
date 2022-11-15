@@ -1,12 +1,11 @@
 package com.newland.wanxin.uua.config;
 
-import com.newland.wanxin.uua.service.CustomJdbcClientDetailsService;
-import com.newland.wanxin.uua.service.OauthService;
+import com.newland.wanxin.uua.service.impl.CustomJdbcClientDetailsService;
+import com.newland.wanxin.uua.service.OAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -35,7 +34,7 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
     private AuthorizationCodeServices authorizationCodeServices;
 
     @Autowired
-    private OauthService oauthService;
+    private OAuthService oauthService;
 
     @Bean
     public PasswordEncoder passwordEncoder() {

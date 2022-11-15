@@ -4,6 +4,7 @@ package com.newland.wanxin.uua.domain;
 import com.newland.wanxin.utils.DateUtil;
 import com.newland.wanxin.uua.utils.GuidGenerator;
 import com.newland.wanxin.uua.utils.PasswordUtils;
+import lombok.Getter;
 import org.apache.commons.lang.StringUtils;
 
 import java.io.Serializable;

@@ -6,10 +6,19 @@ import com.newland.wanxin.uua.domain.OAuthClientDetailsDto;
 
 import java.util.List;
 
-public interface OauthService {
+public interface OAuthService {
 
+    /**
+     * 加载客服端clientdetails
+     * @param clientId
+     * @return
+     */
     OAuthClientDetails loadOauthClientDetails(String clientId);
 
+    /**
+     * 加载所有客服端
+     * @return
+     */
     List<OAuthClientDetailsDto> loadAllOauthClientDetailsDtos();
 
     void archiveOauthClientDetails(String clientId);
