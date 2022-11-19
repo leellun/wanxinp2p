@@ -9,9 +9,10 @@
   <packaging>pom</packaging>
   <modules>
     <module>wanxin-commons</module>
+    <module>wanxin-api</module>
     <module>wanxin-gateway</module>
     <module>wanxin-uua-service</module>
-      <module>wanxin-api</module>
+    <module>wanxin-account-service</module>
   </modules>
   <properties>
     <maven.compiler.source>11</maven.compiler.source>
@@ -29,6 +30,7 @@
     <mybatis-plus.version>3.2.0</mybatis-plus.version>
     <commons-collections4.version>4.2</commons-collections4.version>
     <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
+    <velocity.version>2.0</velocity.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -84,6 +86,18 @@
         <groupId>com.baomidou</groupId>
         <artifactId>mybatis-plus</artifactId>
         <version>${mybatis-plus.version}</version>
+      </dependency>
+      <!--mybatis-plus 代码生成器-->
+      <dependency>
+        <groupId>com.baomidou</groupId>
+        <artifactId>mybatis-plus-generator</artifactId>
+        <version>${mybatis-plus.version}</version>
+      </dependency>
+      <!-- Mybatis Plus 代码生成器模板引擎,  -->
+      <dependency>
+        <groupId>org.apache.velocity</groupId>
+        <artifactId>velocity-engine-core</artifactId>
+        <version>${velocity.version}</version>
       </dependency>
 
       <dependency>

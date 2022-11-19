@@ -1,0 +1,8 @@
+server:
+  port: 88
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.100.100:32065
+        namespace: 52a41dfb-c913-4eca-ad0c-12cc0fa4d777

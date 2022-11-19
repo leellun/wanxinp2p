@@ -29,27 +29,27 @@ public class OAuthServiceImpl implements OAuthService {
     @Override
     @Transactional(readOnly = true)
     public OAuthClientDetails loadOauthClientDetails(String clientId) {
-        return oauthRepository.findOauthClientDetails(clientId);
+        return oauthRepository.findOAuthClientDetails(clientId);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<OAuthClientDetailsDto> loadAllOauthClientDetailsDtos() {
-        List<OAuthClientDetails> clientDetailses = oauthRepository.findAllOauthClientDetails();
+        List<OAuthClientDetails> clientDetailses = oauthRepository.findAllOAuthClientDetails();
         return OAuthClientDetailsDto.toDtos(clientDetailses);
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public void archiveOauthClientDetails(String clientId) {
-        oauthRepository.updateOauthClientDetailsArchive(clientId, true);
+        oauthRepository.updateOAuthClientDetailsArchive(clientId, true);
         LOG.debug("{}|Update OauthClientDetails(clientId: {}) archive = true", WebUtils.getIp(), clientId);
     }
 
     @Override
     @Transactional(readOnly = true)
     public OAuthClientDetailsDto loadOauthClientDetailsDto(String clientId) {
-        final OAuthClientDetails oauthClientDetails = oauthRepository.findOauthClientDetails(clientId);
+        final OAuthClientDetails oauthClientDetails = oauthRepository.findOAuthClientDetails(clientId);
         return oauthClientDetails != null ? new OAuthClientDetailsDto(oauthClientDetails) : null;
     }
 
@@ -57,7 +57,7 @@ public class OAuthServiceImpl implements OAuthService {
     @Transactional(propagation = Propagation.REQUIRED)
     public void registerClientDetails(OAuthClientDetailsDto formDto) {
         OAuthClientDetails clientDetails = formDto.createDomain();
-        oauthRepository.saveOauthClientDetails(clientDetails);
+        oauthRepository.saveOAuthClientDetails(clientDetails);
         LOG.debug("{}|Save OauthClientDetails: {}", WebUtils.getIp(), clientDetails);
     }
 }

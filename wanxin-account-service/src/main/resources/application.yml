@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: wanxinp2p-account-service
+  profiles:
+    active: dev

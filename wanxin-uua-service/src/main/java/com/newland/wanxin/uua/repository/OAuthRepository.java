@@ -7,12 +7,12 @@ import java.util.List;
 
 public interface OAuthRepository {
 
-    OAuthClientDetails findOauthClientDetails(String clientId);
+    OAuthClientDetails findOAuthClientDetails(String clientId);
 
-    List<OAuthClientDetails> findAllOauthClientDetails();
+    List<OAuthClientDetails> findAllOAuthClientDetails();
 
-    void updateOauthClientDetailsArchive(String clientId, boolean archive);
+    void updateOAuthClientDetailsArchive(String clientId, boolean archive);
 
-    void saveOauthClientDetails(OAuthClientDetails clientDetails);
+    void saveOAuthClientDetails(OAuthClientDetails clientDetails);
 
 }
