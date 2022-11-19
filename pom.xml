@@ -13,6 +13,7 @@
     <module>wanxin-gateway</module>
     <module>wanxin-uua-service</module>
     <module>wanxin-account-service</module>
+    <module>wanxin-three-party-service</module>
   </modules>
   <properties>
     <maven.compiler.source>11</maven.compiler.source>
@@ -31,6 +32,7 @@
     <commons-collections4.version>4.2</commons-collections4.version>
     <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
     <velocity.version>2.0</velocity.version>
+    <hmily.version>2.1.1</hmily.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -115,6 +117,11 @@
         <groupId>io.springfox</groupId>
         <artifactId>springfox-swagger-ui</artifactId>
         <version>${springfox-swagger2.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.dromara</groupId>
+        <artifactId>hmily-springcloud</artifactId>
+        <version>${hmily.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

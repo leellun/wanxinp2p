@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: wanxin-three-party-service
+  profiles:
+    active: dev
