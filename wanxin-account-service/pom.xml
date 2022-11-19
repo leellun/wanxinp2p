@@ -10,7 +10,7 @@
     <groupId>com.newland.wanxin</groupId>
     <artifactId>wanxin-account-service</artifactId>
     <name>wanxin-account-service</name>
-    <description>wanxin-account-service</description>
+    <description>统一账户</description>
     <dependencies>
         <dependency>
             <groupId>com.newland.wanxin</groupId>

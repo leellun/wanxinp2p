@@ -10,7 +10,7 @@
 	<groupId>com.newland.wanxin</groupId>
 	<artifactId>wanxin-three-party-service</artifactId>
 	<name>wanxin-three-party-service</name>
-	<description>wanxin-three-party-service</description>
+	<description>短信等三方服务</description>
 	<dependencies>
 		<dependency>
 			<groupId>com.newland.wanxin</groupId>

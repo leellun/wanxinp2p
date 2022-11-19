@@ -8,12 +8,32 @@
   <name>wanxinp2p</name>
   <packaging>pom</packaging>
   <modules>
+    <!--通用组件-->
     <module>wanxin-commons</module>
+    <!--公共api定义-->
     <module>wanxin-api</module>
+    <!--网关-->
     <module>wanxin-gateway</module>
+    <!--统一认证微服务-->
     <module>wanxin-uua-service</module>
+    <!--统一账户-->
     <module>wanxin-account-service</module>
+    <!--注册中心-->
+    <module>wanxin-discover-server</module>
+    <!--用户中心-->
+    <module>wanxin-consumer-service</module>
+    <!--短信等三方服务-->
     <module>wanxin-three-party-service</module>
+    <!--存管系统-->
+    <module>wanxin-depository</module>
+    <!--存管代理-->
+    <module>wanxin-depository-agent-service</module>
+    <!--检索服务-->
+    <module>wanxin-content-search-service</module>
+    <!--还款微服务-->
+    <module>wanxin-repayment-service</module>
+    <!--交易中心微服务-->
+    <module>wanxin-transaction-service</module>
   </modules>
   <properties>
     <maven.compiler.source>11</maven.compiler.source>

@@ -8,7 +8,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <artifactId>wanxin-gateway</artifactId>
-    <description>wanxin-gateway</description>
+    <description>网关</description>
     <dependencies>
         <dependency>
             <groupId>com.newland.wanxin</groupId>
