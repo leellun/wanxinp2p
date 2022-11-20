@@ -1,0 +1,6 @@
+
+spring:
+  application:
+    name: wanxin-depository-agent-service
+  profiles:
+    active: dev

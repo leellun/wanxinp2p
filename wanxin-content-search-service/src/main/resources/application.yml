@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: wanxin-content-search-service
+  profiles:
+    active: dev

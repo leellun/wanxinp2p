@@ -1,0 +1,50 @@
+
+server:
+  port: 8001
+
+spring:
+  profiles: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.100.100:32065
+        namespace: 52a41dfb-c913-4eca-ad0c-12cc0fa4d777
+    sentinel:
+      transport:
+        dashboard: 192.168.100.100:32329
+    stream:
+      rocketmq:
+        binder:
+          name-server: 192.168.100.100:30411
+
+      bindings:
+        input:
+          group: wanxin_depository_agent
+          content-type: application/json
+          destination: TP_GATEWAY_NOTIFY_AGENT
+  zipkin:
+    base-url: http://192.168.100.100:32239
+    sender:
+      type: web
+    discovery-client-enabled: false
+  sleuth:
+    sampler:
+      probability: 1
+  elasticsearch:
+    rest:
+      uris: http://192.168.100.100:32104
+      connection-timeout: 60000
+      read-timeout: 30s
+
+mybatis-plus:
+  mapper-locations: classpath:/xml/**/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+
+swagger:
+  enable: true
+
+wanxinp2p:
+  es:
+    index: projectvo
