@@ -42,7 +42,18 @@ spring:
   sleuth:
     sampler:
       probability: 1
-
+  redis:
+    database: 0
+    password: liulun666
+    lettuce:
+      pool:
+        max-active:  50
+        max-idle: 20
+        min-idle: 1
+        max-wait: PT10S
+    host: 192.168.100.100
+    port: 31351
+    timeout: PT10S
 mybatis-plus:
   mapper-locations: classpath:/xml/**/*.xml
   global-config:

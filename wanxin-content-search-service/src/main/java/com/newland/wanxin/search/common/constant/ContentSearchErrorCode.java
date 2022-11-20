@@ -1,7 +1,7 @@
 package com.newland.wanxin.search.common.constant;
 
 
-import cn.itcast.wanxinp2p.common.domain.ErrorCode;
+import com.newland.wanxin.domain.ErrorCode;
 
 /**
  * 异常编码 0成功、-1熔断、 -2 标准参数校验不通过 -3会话超时

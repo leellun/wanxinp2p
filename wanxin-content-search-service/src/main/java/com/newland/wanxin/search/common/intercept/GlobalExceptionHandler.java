@@ -1,9 +1,9 @@
 package com.newland.wanxin.search.common.intercept;
 
 
-import cn.itcast.wanxinp2p.common.domain.BusinessException;
-import cn.itcast.wanxinp2p.common.domain.CommonErrorCode;
-import cn.itcast.wanxinp2p.common.domain.RestResponse;
+import com.newland.wanxin.domain.BusinessException;
+import com.newland.wanxin.domain.CommonErrorCode;
+import com.newland.wanxin.domain.RestResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.lang.Nullable;
