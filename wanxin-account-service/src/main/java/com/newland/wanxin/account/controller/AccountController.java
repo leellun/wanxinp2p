@@ -9,13 +9,10 @@ import com.newland.wanxin.api.account.model.AccountRegisterDTO;
 import com.newland.wanxin.domain.RestResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -36,22 +33,39 @@ public class AccountController implements AccountAPI {
     @ApiImplicitParam(name = "mobile", value = "手机号", dataType = "String")
     @GetMapping("/sms/{mobile}")
     public RestResponse getSMSCode(String mobile) {
-        return accountService.getSMSCode(mobile);
+        accountService.getSMSCode(mobile);
+        return RestResponse.success();
+    }
+
+    @ApiOperation("校验手机号和验证码")
+    @ApiImplicitParams({@ApiImplicitParam(name = "mobile", value = "手机号", required = true,
+            dataType = "String"),
+            @ApiImplicitParam(name = "key", value = "校验标识", required = true, dataType = "String"),
+            @ApiImplicitParam(name = "code", value = "验证码", required = true, dataType = "String")})
+    @Override
+    @GetMapping("/mobiles/{mobile}/key/{key}/code/{code}")
+    public RestResponse<Integer> checkMobile(@PathVariable String mobile,
+                                             @PathVariable String key,
+                                             @PathVariable String code) {
+        return RestResponse.success(accountService.checkMobile(mobile,key,code));
     }
 
     @Override
-    public RestResponse<Integer> checkMobile(String mobile, String key, String code) {
-        return null;
+    @ApiOperation("用户注册")
+    @ApiImplicitParam(name = "accountRegisterDTO", value = "账户注册信息", required = true,
+            dataType = "AccountRegisterDTO", paramType = "body")
+    @PostMapping(value = "/l/accounts")
+    public RestResponse<AccountDTO> register(@RequestBody AccountRegisterDTO accountRegisterDTO) {
+        return  RestResponse.success(accountService.register(accountRegisterDTO));
     }
 
+    @ApiOperation("用户登录")
+    @ApiImplicitParam(name = "accountLoginDTO", value = "登录信息", required = true,
+            dataType = "AccountLoginDTO", paramType = "body")
+    @PostMapping(value = "/l/accounts/session")
     @Override
-    public RestResponse<AccountDTO> register(AccountRegisterDTO accountRegisterDTO) {
-        return null;
-    }
-
-    @Override
-    public RestResponse<AccountDTO> login(AccountLoginDTO accountLoginDTO) {
-        return null;
+    public RestResponse<AccountDTO> login(@RequestBody AccountLoginDTO accountLoginDTO) {
+        return RestResponse.success(accountService.login(accountLoginDTO));
     }
 }
 

@@ -1,6 +1,6 @@
 package com.newland.wanxin.utils;
 
-import cn.itcast.wanxinp2p.common.domain.CodePrefixCode;
+import com.newland.wanxin.domain.CodePrefixCode;
 
 import java.util.UUID;
 
