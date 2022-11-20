@@ -1,6 +1,6 @@
 
 server:
-  port: 8001
+  port: 8002
 
 spring:
   profiles: dev
@@ -34,16 +34,6 @@ spring:
     sentinel:
       transport:
         dashboard: 192.168.100.100:32329
-    stream:
-      rocketmq:
-        binder:
-          name-server: 192.168.100.100:30411
-
-      bindings:
-        input:
-          group: wanxin_depository_agent
-          content-type: application/json
-          destination: TP_GATEWAY_NOTIFY_AGENT
   zipkin:
     base-url: http://192.168.100.100:32239
     sender:

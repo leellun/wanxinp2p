@@ -1,5 +1,6 @@
 package com.newland.wanxin.depository.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.newland.wanxin.depository.entity.BankUser;
 import com.newland.wanxin.depository.mapper.BankUserMapper;
 import com.newland.wanxin.depository.service.BankUserService;
@@ -16,5 +17,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class BankUserServiceImpl extends ServiceImpl<BankUserMapper, BankUser> implements BankUserService {
-
+    @Override
+    public BankUser getUser(String fullname, String idNumber) {
+        return getOne(new QueryWrapper<BankUser>().lambda().eq(BankUser::getFullname, fullname)
+                .eq(BankUser::getIdNumber, idNumber), false);
+    }
 }

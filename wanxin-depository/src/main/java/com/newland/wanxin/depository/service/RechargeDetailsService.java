@@ -2,6 +2,8 @@ package com.newland.wanxin.depository.service;
 
 import com.newland.wanxin.depository.entity.RechargeDetails;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.newland.wanxin.depository.model.request.RechargeRequest;
+import com.newland.wanxin.depository.model.response.RechargeResponse;
 
 /**
  * <p>
@@ -12,5 +14,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2022-11-20
  */
 public interface RechargeDetailsService extends IService<RechargeDetails> {
-
+    /**
+     * 用户充值
+     * @param rechargeRequest
+     * @return
+     */
+    RechargeResponse recharge(RechargeRequest rechargeRequest);
 }
