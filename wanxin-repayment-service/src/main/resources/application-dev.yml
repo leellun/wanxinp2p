@@ -1,0 +1,63 @@
+
+server:
+  port: 8005
+
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:mysql://192.168.100.100:32545/p2p_repayment?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: wanxinp2p
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      initial-size: 10
+      min-idle: 10
+      max-active: 50
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1 FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      filters: stat,wall
+      max-pool-prepared-statement-per-connection-size: 20
+      use-global-data-source-stat: true
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+    type: com.alibaba.druid.pool.DruidDataSource
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.100.100:32065
+        namespace: 52a41dfb-c913-4eca-ad0c-12cc0fa4d777
+    sentinel:
+      transport:
+        dashboard: 192.168.100.100:32329
+    stream:
+      rocketmq:
+        binder:
+          name-server: 192.168.100.100:30411
+
+      bindings:
+        input:
+          group: wanxin_depository_agent
+          content-type: application/json
+          destination: TP_GATEWAY_NOTIFY_AGENT
+  zipkin:
+    base-url: http://192.168.100.100:32239
+    sender:
+      type: web
+    discovery-client-enabled: false
+  sleuth:
+    sampler:
+      probability: 1
+
+mybatis-plus:
+  mapper-locations: classpath:/xml/**/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+
+swagger:
+  enable: true
