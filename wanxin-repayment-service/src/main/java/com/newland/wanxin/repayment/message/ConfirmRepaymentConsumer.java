@@ -1,10 +1,10 @@
 package com.newland.wanxin.repayment.message;
 
-import cn.itcast.wanxinp2p.api.depository.model.RepaymentRequest;
-import cn.itcast.wanxinp2p.repayment.entity.RepaymentPlan;
-import cn.itcast.wanxinp2p.repayment.service.RepaymentService;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.newland.wanxin.api.depository.model.RepaymentRequest;
+import com.newland.wanxin.repayment.entity.RepaymentPlan;
+import com.newland.wanxin.repayment.service.RepaymentPlanService;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 public class ConfirmRepaymentConsumer implements RocketMQListener<String> {
 
     @Autowired
-    private RepaymentService repaymentService;
+    private RepaymentPlanService repaymentService;
 
     @Override
     public void onMessage(String message) {

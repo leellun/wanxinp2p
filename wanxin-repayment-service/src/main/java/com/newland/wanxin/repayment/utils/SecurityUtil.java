@@ -1,6 +1,6 @@
 package com.newland.wanxin.repayment.utils;
 
-import cn.itcast.wanxinp2p.repayment.model.LoginUser;
+import com.newland.wanxin.repayment.model.LoginUser;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
