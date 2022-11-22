@@ -40,10 +40,18 @@ spring:
           name-server: 192.168.100.100:30411
 
       bindings:
-        input:
-          group: wanxin_depository_agent
+        replayment:
+          group: PID_CONFIRM_REPAYMENT
           content-type: application/json
-          destination: TP_GATEWAY_NOTIFY_AGENT
+          destination: TP_CONFIRM_REPAYMENT
+        input:
+          group: CID_START_REPAYMENT
+          content-type: application/json
+          destination: TP_START_REPAYMENT
+        ouput:
+          group: PID_CONFIRM_REPAYMENT
+          content-type: application/json
+          destination: TP_CONFIRM_REPAYMENT
   zipkin:
     base-url: http://192.168.100.100:32239
     sender:
@@ -64,12 +72,13 @@ swagger:
 
 elasticjob:
   regCenter:
-    serverLists: 192.168.100.100:31378
+    serverLists: 192.168.100.100:2181,192.168.100.100:2182,192.168.100.100:2183
     namespace: elasticjob-lite-springboot
     max-sleep-time-milliseconds: 10000
     connection-timeout-milliseconds: 10000
     session-timeout-milliseconds: 100000
     base-sleep-time-milliseconds: 10000
+    max-retries: 10
   jobs:
     dataflowJob:
       elasticJobClass: com.newland.wanxin.repayment.job.RepaymentJob
