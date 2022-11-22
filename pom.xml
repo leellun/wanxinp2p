@@ -60,6 +60,7 @@
         <curator.version>5.2.0</curator.version>
         <guava.version>31.0-jre</guava.version>
         <zookeeper.version>3.8.0</zookeeper.version>
+        <shardingsphere.version>4.1.0</shardingsphere.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -205,6 +206,11 @@
                 <groupId>org.apache.zookeeper</groupId>
                 <artifactId>zookeeper</artifactId>
                 <version>${zookeeper.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shardingsphere</groupId>
+                <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
+                <version>${shardingsphere.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
