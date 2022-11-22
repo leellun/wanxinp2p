@@ -61,3 +61,21 @@ mybatis-plus:
 
 swagger:
   enable: true
+
+elasticjob:
+  regCenter:
+    serverLists: 192.168.100.100:31378
+    namespace: elasticjob-lite-springboot
+    max-sleep-time-milliseconds: 10000
+    connection-timeout-milliseconds: 10000
+    session-timeout-milliseconds: 100000
+    base-sleep-time-milliseconds: 10000
+  jobs:
+    dataflowJob:
+      elasticJobClass: com.newland.wanxin.repayment.job.RepaymentJob
+      cron: 0 0/5 * * * ?
+      shardingTotalCount: 3
+
+sms:
+  qcloud:
+    templateId: 1

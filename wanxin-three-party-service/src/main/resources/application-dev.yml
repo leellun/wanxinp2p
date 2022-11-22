@@ -20,3 +20,9 @@ spring:
   sleuth:
     sampler:
       probability: 1
+
+sms:
+  qcloud:
+    appId: 123423
+    appKey: 52a41dfb-c913-4eca-ad0c-12cc0fa4d777
+    sign: 52a4222-sdfs-2222-34333-33333333333

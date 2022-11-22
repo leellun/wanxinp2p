@@ -1,8 +1,8 @@
 package com.newland.wanxin.repayment.job;
 
-import cn.itcast.wanxinp2p.repayment.service.RepaymentService;
-import com.dangdang.ddframe.job.api.ShardingContext;
-import com.dangdang.ddframe.job.api.simple.SimpleJob;
+import com.newland.wanxin.repayment.service.RepaymentPlanService;
+import org.apache.shardingsphere.elasticjob.api.ShardingContext;
+import org.apache.shardingsphere.elasticjob.simple.job.SimpleJob;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 public class RepaymentJob implements SimpleJob {
 
     @Autowired
-    private RepaymentService repaymentService;
+    private RepaymentPlanService repaymentService;
 
     @Override
     public void execute(ShardingContext shardingContext) {
