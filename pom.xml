@@ -91,6 +91,11 @@
             <!--druid-->
             <dependency>
                 <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid-spring-boot-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid-spring-boot-starter.version}</version>
             </dependency>
