@@ -3,18 +3,36 @@ package com.newland.wanxin.uua.config;
 import com.newland.wanxin.uua.service.impl.CustomJdbcClientDetailsService;
 import com.newland.wanxin.uua.service.OAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
+import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.security.oauth2.provider.OAuth2RequestFactory;
+import org.springframework.security.oauth2.provider.approval.UserApprovalHandler;
 import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
-import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
+import org.springframework.security.oauth2.provider.request.DefaultOAuth2RequestFactory;
+import org.springframework.security.oauth2.provider.token.*;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
 import javax.sql.DataSource;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * 权限服务
@@ -27,26 +45,121 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
     @Autowired
     private TokenStore tokenStore;
     @Autowired
-    private JwtAccessTokenConverter jwtAccessTokenConverter;
+    private JwtAccessTokenConverter accessTokenConverter;
     @Autowired
+    @Qualifier("jdbcClientDetailsService")
     private ClientDetailsService clientDetailsService;
     @Autowired
     private AuthorizationCodeServices authorizationCodeServices;
 
     @Autowired
     private OAuthService oauthService;
-
+    @Autowired
+    private AuthenticationManager authenticationManager;
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-    @Bean
+    @Bean("jdbcClientDetailsService")
     public ClientDetailsService clientDetailsService(DataSource dataSource) {
         ClientDetailsService clientDetailsService = new CustomJdbcClientDetailsService(dataSource);
         ((CustomJdbcClientDetailsService) clientDetailsService).setPasswordEncoder(passwordEncoder());
         return clientDetailsService;
     }
 
+    @Bean
+    public AuthorizationServerTokenServices tokenService() {
+        DefaultTokenServices service = new DefaultTokenServices();
+        service.setClientDetailsService(clientDetailsService);
+        service.setSupportRefreshToken(true);
+        service.setTokenStore(tokenStore);
+
+        TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+        tokenEnhancerChain.setTokenEnhancers(Arrays.asList(tokenEnhancer(), accessTokenConverter));
+        service.setTokenEnhancer(tokenEnhancerChain);
+
+        service.setAccessTokenValiditySeconds(7200); // 令牌默认有效期2小时
+        service.setRefreshTokenValiditySeconds(259200); // 刷新令牌默认有效期3天
+        return service;
+    }
+
+
+    @Bean
+    public AuthorizationCodeServices authorizationCodeServices(DataSource dataSource) {
+        return new JdbcAuthorizationCodeServices(dataSource);
+    }
+
+    @Override
+    public void configure(ClientDetailsServiceConfigurer clients)
+            throws Exception {
+        clients.withClientDetails(clientDetailsService);
+    }
+
+    @Bean
+    public OAuth2RequestFactory oAuth2RequestFactory() {
+        return new DefaultOAuth2RequestFactory(clientDetailsService);
+    }
+
+
+    @Bean
+    public UserApprovalHandler userApprovalHandler() {
+        OAuthUserApprovalHandler userApprovalHandler = new OAuthUserApprovalHandler();
+        userApprovalHandler.setOauthService(oauthService);
+        userApprovalHandler.setTokenStore(tokenStore);
+        userApprovalHandler.setClientDetailsService(this.clientDetailsService);
+        userApprovalHandler.setRequestFactory(oAuth2RequestFactory());
+        return userApprovalHandler;
+    }
+
+    @Override
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
+        endpoints.authenticationManager(authenticationManager)
+                //.userDetailsService(userDetailsService)// 若无，refresh_token会有UserDetailsService	 is required错误
+                .authorizationCodeServices(authorizationCodeServices)
+                .userApprovalHandler(userApprovalHandler())
+                .tokenServices(tokenService())
+                .pathMapping("/oauth/confirm_access", "/confirm_access")
+                .pathMapping("/oauth/error", "/oauth_error")
+                .allowedTokenEndpointRequestMethods(HttpMethod.POST)
+                .exceptionTranslator(new RestOAuth2WebResponseExceptionTranslator());
+    }
+
+    @Bean
+    public TokenEnhancer tokenEnhancer() {
+        return new TokenEnhancer() {
+            @Override
+            public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
+                /*if (accessToken instanceof DefaultOAuth2AccessToken){
+                	if( authentication.getPrincipal() instanceof UnifiedUserDetails){
+						UnifiedUserDetails unifiedUserDetails =(UnifiedUserDetails) authentication.getPrincipal();
+						DefaultOAuth2AccessToken token= (DefaultOAuth2AccessToken) accessToken;
+						Map<String, Object> additionalInformation = new LinkedHashMap<String, Object>();
+						additionalInformation.put("mobile",unifiedUserDetails.getMobile());
+						additionalInformation.put("tenant_id",unifiedUserDetails.getTenantId());
+						additionalInformation.put("department_id",unifiedUserDetails.getDepartmentId());
+						additionalInformation.put("user_authorities",unifiedUserDetails.getUserAuthorities());
+						token.setAdditionalInformation(additionalInformation);
+
+					}
+
+                }*/
+                DefaultOAuth2AccessToken token = (DefaultOAuth2AccessToken) accessToken;
+                Map<String, Object> additionalInformation = new LinkedHashMap<String, Object>();
+                additionalInformation.put("code", 0);
+                additionalInformation.put("msg", "success");
+                token.setAdditionalInformation(additionalInformation);
+                return accessToken;
+            }
+        };
+    }
+
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer security)
+            throws Exception {
+        security
+                .tokenKeyAccess("permitAll()")
+                .checkTokenAccess("permitAll()")
+                .allowFormAuthenticationForClients();//允许表单认证
+    }
 
 }

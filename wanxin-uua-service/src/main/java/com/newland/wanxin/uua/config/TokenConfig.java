@@ -46,7 +46,7 @@ public class TokenConfig {
     /**
      * 配置令牌管理
      */
-    @Bean
+//    @Bean
     public AuthorizationServerTokenServices tokenService(ClientDetailsService clientDetailsService, TokenStore tokenStore
             , JwtAccessTokenConverter accessTokenConverter) {
         DefaultTokenServices service = new DefaultTokenServices();
@@ -64,7 +64,7 @@ public class TokenConfig {
      * 授权码存储方式
      */
 
-    @Bean
+//    @Bean
     public AuthorizationCodeServices authorizationCodeServices(DataSource dataSource) {
         return new JdbcAuthorizationCodeServices(dataSource);
     }

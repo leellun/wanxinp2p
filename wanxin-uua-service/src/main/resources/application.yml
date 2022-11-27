@@ -2,4 +2,6 @@
 spring:
   application:
     name: wanxin-uua-service
+  profiles:
+    active: dev
 
