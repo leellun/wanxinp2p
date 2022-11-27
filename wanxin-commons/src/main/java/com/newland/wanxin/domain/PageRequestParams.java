@@ -3,7 +3,6 @@
 
 package com.newland.wanxin.domain;
 
-
 public class PageRequestParams {
 	
 	private long startRow;

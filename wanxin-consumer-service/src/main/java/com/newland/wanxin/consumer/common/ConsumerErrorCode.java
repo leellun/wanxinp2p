@@ -1,7 +1,7 @@
 package com.newland.wanxin.consumer.common;
 
 
-import com.newland.wanxin.domain.ErrorCode;
+import com.newland.wanxin.enumeration.ErrorCode;
 
 /**
  * 异常编码 0成功、-1熔断、 -2 标准参数校验不通过 -3会话超时

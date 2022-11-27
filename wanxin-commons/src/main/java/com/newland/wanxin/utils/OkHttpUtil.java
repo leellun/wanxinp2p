@@ -1,7 +1,7 @@
 package com.newland.wanxin.utils;
 
 import com.alibaba.fastjson.JSON;
-import com.newland.wanxin.domain.CommonErrorCode;
+import com.newland.wanxin.enumeration.CommonErrorCode;
 import com.newland.wanxin.domain.RestResponse;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;

@@ -2,7 +2,7 @@
 package com.newland.wanxin.depositoryagent.common.constant;
 
 
-import com.newland.wanxin.domain.ErrorCode;
+import com.newland.wanxin.enumeration.ErrorCode;
 
 /**
  * 存管代理服务异常编码 16

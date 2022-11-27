@@ -1,8 +1,8 @@
 package com.newland.wanxin.consumer.common;
 
 
-import com.newland.wanxin.domain.BusinessException;
-import com.newland.wanxin.domain.CommonErrorCode;
+import com.newland.wanxin.exception.BusinessException;
+import com.newland.wanxin.enumeration.CommonErrorCode;
 import com.newland.wanxin.domain.RestResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;

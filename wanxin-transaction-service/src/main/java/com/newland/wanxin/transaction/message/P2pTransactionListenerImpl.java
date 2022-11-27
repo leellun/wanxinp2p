@@ -2,7 +2,7 @@ package com.newland.wanxin.transaction.message;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.newland.wanxin.domain.ProjectCode;
+import com.newland.wanxin.enumeration.ProjectCode;
 import com.newland.wanxin.transaction.entity.Project;
 import com.newland.wanxin.transaction.mapper.ProjectMapper;
 import com.newland.wanxin.transaction.service.ProjectService;

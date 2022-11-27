@@ -1,6 +1,6 @@
 package com.newland.wanxin.utils;
 
-import com.newland.wanxin.domain.CodePrefixCode;
+import com.newland.wanxin.enumeration.CodePrefixCode;
 
 import java.util.UUID;
 

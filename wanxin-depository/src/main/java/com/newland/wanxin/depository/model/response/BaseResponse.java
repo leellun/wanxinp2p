@@ -2,7 +2,7 @@ package com.newland.wanxin.depository.model.response;
 
 import com.newland.wanxin.depository.common.domain.LocalReturnCode;
 import com.newland.wanxin.depository.common.domain.ReturnCode;
-import com.newland.wanxin.domain.StatusCode;
+import com.newland.wanxin.enumeration.StatusCode;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 

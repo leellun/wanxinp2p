@@ -1,8 +1,8 @@
 package com.newland.wanxin.search.common.intercept;
 
 
-import com.newland.wanxin.domain.BusinessException;
-import com.newland.wanxin.domain.CommonErrorCode;
+import com.newland.wanxin.exception.BusinessException;
+import com.newland.wanxin.enumeration.CommonErrorCode;
 import com.newland.wanxin.domain.RestResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

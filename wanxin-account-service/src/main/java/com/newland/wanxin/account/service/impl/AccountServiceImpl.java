@@ -12,7 +12,7 @@ import com.newland.wanxin.api.account.model.AccountDTO;
 import com.newland.wanxin.api.account.model.AccountLoginDTO;
 import com.newland.wanxin.api.account.model.AccountRegisterDTO;
 import com.newland.wanxin.constant.WanxinConstant;
-import com.newland.wanxin.domain.BusinessException;
+import com.newland.wanxin.exception.BusinessException;
 import com.newland.wanxin.redis.cache.Cache;
 import com.newland.wanxin.utils.IdentifyCodeUtils;
 import com.newland.wanxin.utils.PasswordUtil;
