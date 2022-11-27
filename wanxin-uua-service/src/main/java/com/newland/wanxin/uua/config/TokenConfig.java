@@ -43,29 +43,4 @@ public class TokenConfig {
         converter.setAccessTokenConverter(accessTokenConverter);
         return converter;
     }
-    /**
-     * 配置令牌管理
-     */
-//    @Bean
-    public AuthorizationServerTokenServices tokenService(ClientDetailsService clientDetailsService, TokenStore tokenStore
-            , JwtAccessTokenConverter accessTokenConverter) {
-        DefaultTokenServices service = new DefaultTokenServices();
-        service.setClientDetailsService(clientDetailsService);
-        service.setSupportRefreshToken(true);
-        service.setTokenStore(tokenStore);
-        service.setAccessTokenValiditySeconds(accessTokenValiditySeconds);
-        TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
-        tokenEnhancerChain.setTokenEnhancers(Collections.singletonList(accessTokenConverter));
-        service.setTokenEnhancer(tokenEnhancerChain);
-        return service;
-    }
-
-    /**
-     * 授权码存储方式
-     */
-
-//    @Bean
-    public AuthorizationCodeServices authorizationCodeServices(DataSource dataSource) {
-        return new JdbcAuthorizationCodeServices(dataSource);
-    }
 }
