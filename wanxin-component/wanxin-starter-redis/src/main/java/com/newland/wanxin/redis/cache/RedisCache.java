@@ -1,14 +1,16 @@
-package com.newland.wanxin.account.common.cache;
+package com.newland.wanxin.redis.cache;
 
-import com.newland.wanxin.cache.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-//@Component
+@ConditionalOnClass(StringRedisTemplate.class)
+@Component
 public class RedisCache implements Cache {
 
     @Autowired
@@ -79,3 +81,4 @@ public class RedisCache implements Cache {
     }
 
 }
+

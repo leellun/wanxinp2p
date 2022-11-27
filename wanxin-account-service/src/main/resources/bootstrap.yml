@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: wanxinp2p-account-service
+  profiles:
+    active: dev
+---
+spring:
+  profiles: dev
+  cloud:
+    nacos:
+      config:
+        server-addr: 192.168.100.100:32065
+        namespace: 52a41dfb-c913-4eca-ad0c-12cc0fa4d777
+        file-extension: yaml
+---
+spring:
+  profiles: prod
+  cloud:
+    nacos:
+      config:
+        server-addr: nacos-hs:8848
+        namespace: 52a41dfb-c913-4eca-ad0c-12cc0fa4d777
+        file-extension: yaml

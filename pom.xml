@@ -12,6 +12,8 @@
         <module>wanxin-commons</module>
         <!--公共api定义-->
         <module>wanxin-api</module>
+        <!--component-->
+        <module>wanxin-component</module>
         <!--网关-->
         <module>wanxin-gateway</module>
         <!--统一认证微服务-->
