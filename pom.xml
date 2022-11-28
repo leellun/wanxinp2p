@@ -34,6 +34,7 @@
         <module>wanxin-repayment-service</module>
         <!--交易中心微服务-->
         <module>wanxin-transaction-service</module>
+        <module>wanxin-component/swagger-spring-boot-starter</module>
     </modules>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
