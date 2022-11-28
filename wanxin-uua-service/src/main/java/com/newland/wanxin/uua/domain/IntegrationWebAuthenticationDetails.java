@@ -21,11 +21,12 @@ public class IntegrationWebAuthenticationDetails extends WebAuthenticationDetail
      * 认证类型
      */
     private String authenticationType;
+
     public IntegrationWebAuthenticationDetails(HttpServletRequest request) {
         super(request);
-        this.domain=request.getParameter("domain");
-        this.key=request.getParameter("key");
-        this.authenticationType=request.getParameter("authenticationType");
+        this.domain = request.getParameter("domain");
+        this.key = request.getParameter("key");
+        this.authenticationType = request.getParameter("authenticationType");
     }
 
     public String getAuthenticationType() {

@@ -16,7 +16,7 @@ public class OAuthUserApprovalHandler extends TokenStoreUserApprovalHandler {
 
     public OAuthUserApprovalHandler() {
     }
-
+    @Override
     public boolean isApproved(AuthorizationRequest authorizationRequest, Authentication userAuthentication) {
         if (super.isApproved(authorizationRequest, userAuthentication)) {
             return true;
