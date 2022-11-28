@@ -1,5 +1,6 @@
-package com.newland.wanxin.uua.config;
+package com.newland.wanxin.uua.exception;
 
+import com.newland.wanxin.uua.exception.RestOAuth2Exception;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

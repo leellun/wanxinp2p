@@ -1,4 +1,4 @@
-package com.newland.wanxin.uua.config;
+package com.newland.wanxin.uua.exception;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;

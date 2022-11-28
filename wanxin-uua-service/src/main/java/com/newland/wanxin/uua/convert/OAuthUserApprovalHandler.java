@@ -1,4 +1,4 @@
-package com.newland.wanxin.uua.config;
+package com.newland.wanxin.uua.convert;
 
 
 import com.newland.wanxin.uua.domain.OAuthClientDetails;
@@ -7,7 +7,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.provider.AuthorizationRequest;
 import org.springframework.security.oauth2.provider.approval.TokenStoreUserApprovalHandler;
 
-
+/**
+ * 通过查询现有令牌来记住批准决定的用户 批准处理程序。
+ */
 public class OAuthUserApprovalHandler extends TokenStoreUserApprovalHandler {
 
     private OAuthService oauthService;
