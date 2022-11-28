@@ -1,3 +1,6 @@
+server:
+  servlet:
+    context-path: /account
 spring:
   application:
     name: wanxinp2p-account-service

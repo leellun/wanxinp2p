@@ -7,8 +7,37 @@ spring:
       discovery:
         server-addr: 192.168.100.100:32065
         namespace: 52a41dfb-c913-4eca-ad0c-12cc0fa4d777
+    sentinel:
+      transport:
+        dashboard: 192.168.100.100:32329
+  zipkin:
+    base-url: http://192.168.100.100:32239
+    sender:
+      type: web
+    discovery-client-enabled: false
+  sleuth:
+    sampler:
+      probability: 1
+
   datasource:
     url: jdbc:mysql://192.168.100.100:32545/p2p_uaa?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
     password: wanxinp2p
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+  freemarker:
+    #指定freemarker的模板路径和模板的后缀
+    template-loader-path: classpath:/templates/
+    suffix: .html
+    # 指定字符集
+    charset: utf-8
+    # 指定是否要启用缓存
+    cache: false
+    #指定是否要暴露请求和会话属性
+    expose-request-attributes: true
+    expose-session-attributes: true
+    request-context-attribute: rc
+
+  # spring 静态资源扫描路径
+  resources:
+    static-locations: classpath:/static/

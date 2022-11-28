@@ -220,6 +220,7 @@
                 <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
                 <version>${shardingsphere.version}</version>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
     <dependencies>
