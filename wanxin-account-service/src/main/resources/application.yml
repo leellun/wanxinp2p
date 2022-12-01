@@ -3,6 +3,8 @@ server:
     context-path: /account
 spring:
   application:
-    name: wanxinp2p-account-service
+    name: wanxin-account-service
   profiles:
     active: dev
+logging:
+  config: classpath:logback-spring.xml

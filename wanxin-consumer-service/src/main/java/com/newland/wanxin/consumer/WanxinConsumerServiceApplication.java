@@ -13,9 +13,9 @@ import org.springframework.cloud.stream.messaging.Sink;
 @EnableFeignClients
 @EnableBinding({Sink.class})
 @MapperScan("com.newland.wanxin.consumer.mapper")
-public class Wanxinp2pConsumerServiceApplication {
+public class WanxinConsumerServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(Wanxinp2pConsumerServiceApplication.class, args);
+        SpringApplication.run(WanxinConsumerServiceApplication.class, args);
     }
 
 }

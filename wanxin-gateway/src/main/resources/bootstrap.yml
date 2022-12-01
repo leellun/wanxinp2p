@@ -1,6 +1,6 @@
 spring:
   application:
-    name: wanxin-account-service
+    name: gateway-server
   profiles:
     active: dev
 ---

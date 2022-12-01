@@ -37,7 +37,7 @@ spring:
     stream:
       rocketmq:
         binder:
-          name-server: 192.168.100.100:30411
+          name-server: 192.168.100.100:8876
       bindings:
         input:
           group: wanxin_depository_agent
@@ -54,7 +54,7 @@ spring:
       probability: 1
 
 mybatis-plus:
-  mapper-locations: classpath:/xml/**/*.xml
+  mapper-locations: classpath:/xml/*.xml
   global-config:
     db-config:
       id-type: auto

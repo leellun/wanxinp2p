@@ -26,8 +26,8 @@ public class RocketmqStreamListener {
     private ConsumerService consumerService;
 
     @StreamListener(value = Sink.INPUT)
-    public ConsumeConcurrentlyStatus getListener(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
-        try {
+    public void getListener(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
+        try{
             Message message = msgs.get(0);
             String topic = message.getTopic();
             String tag = message.getTags();
@@ -37,11 +37,9 @@ public class RocketmqStreamListener {
                 DepositoryConsumerResponse response = JSON.parseObject(body, DepositoryConsumerResponse.class);
                 consumerService.modifyResult(response);
             }
-            //if...
-
+            context.setAckIndex(0);
         }catch (Exception e){
-            return ConsumeConcurrentlyStatus.RECONSUME_LATER;
+            e.printStackTrace();
         }
-        return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
     }
 }

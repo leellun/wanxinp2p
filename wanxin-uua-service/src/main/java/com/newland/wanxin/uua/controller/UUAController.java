@@ -22,7 +22,7 @@ import java.util.Map;
 /**
  * 统一认证
  */
-@Controller
+//@Controller
 public class UUAController {
 
     private static final Logger LOG = LoggerFactory.getLogger(UUAController.class);
