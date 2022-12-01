@@ -1,6 +1,6 @@
 spring:
   application:
-    name: wanxinp2p-account-service
+    name: wanxin-account-service
   profiles:
     active: dev
 ---

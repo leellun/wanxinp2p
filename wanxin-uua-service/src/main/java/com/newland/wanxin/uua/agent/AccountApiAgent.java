@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(value = "wanxinp2p-account-service")
+@FeignClient(value = "wanxin-account-service")
 public interface AccountApiAgent {
 
     @PostMapping(value = "/account/l/accounts/session")

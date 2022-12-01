@@ -62,7 +62,7 @@ spring:
       probability: 1
 
 mybatis-plus:
-  mapper-locations: classpath:/xml/**/*.xml
+  mapper-locations: classpath:/xml/*.xml
   global-config:
     db-config:
       id-type: auto

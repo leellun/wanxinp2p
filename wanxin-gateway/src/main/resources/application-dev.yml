@@ -6,3 +6,28 @@ spring:
       discovery:
         server-addr: 192.168.100.100:32065
         namespace: 52a41dfb-c913-4eca-ad0c-12cc0fa4d777
+    sentinel:
+      transport:
+        dashboard: 192.168.100.100:32329
+    gateway:
+      routes:
+        - id: wanxin-uua-service
+          uri: lb://wanxin-uua-service
+          predicates:
+            - Path=/uaa/**
+          filters:
+            - RewritePath=/uaa/(?<segment>/?.*),/$\{segment}
+        - id: wanxin-consumer-service
+          uri: lb://wanxin-consumer-service
+          predicates:
+            - Path=/consumer/**
+          filters:
+            - RewritePath=/consumer/(?<segment>/?.*),/$\{segment}
+  zipkin:
+    base-url: http://192.168.100.100:32239
+    sender:
+      type: web
+    discovery-client-enabled: false
+  sleuth:
+    sampler:
+      probability: 1
