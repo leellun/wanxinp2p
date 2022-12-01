@@ -10,6 +10,10 @@ import org.springframework.security.web.server.authorization.ServerAccessDeniedH
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+/**
+ * 访问拒绝，没有权限
+ * 在没有token的情况下
+ */
 public class RestAccessDeniedHandler implements ServerAccessDeniedHandler {
 
     @Override

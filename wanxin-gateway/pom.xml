@@ -28,7 +28,6 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-oauth2</artifactId>
         </dependency>
-
         <!--nacos服务订阅发现-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>

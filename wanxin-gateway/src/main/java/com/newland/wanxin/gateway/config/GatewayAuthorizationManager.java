@@ -2,6 +2,7 @@ package com.newland.wanxin.gateway.config;
 
 import com.alibaba.nacos.common.utils.ConcurrentHashSet;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authorization.AuthorizationDecision;
 import org.springframework.security.authorization.ReactiveAuthorizationManager;
@@ -34,7 +35,7 @@ public class GatewayAuthorizationManager implements ReactiveAuthorizationManager
     private String scope;
     private List<String> rolePermissions;
 
-    public GatewayAuthorizationManager(String scope, String ... rolePermissions) {
+    public GatewayAuthorizationManager(String scope, String... rolePermissions) {
         this.scope = scope;
         this.rolePermissions = Arrays.asList(rolePermissions);
     }
@@ -51,6 +52,10 @@ public class GatewayAuthorizationManager implements ReactiveAuthorizationManager
         if (permitAll(requestPath)) {
             return Mono.just(new AuthorizationDecision(true));
         }
+//        String token = getToken(exchange);
+//        if(token!=null){
+//            return Mono.just(new AuthorizationDecision(true));
+//        }
 
         return authenticationMono.map(auth -> new AuthorizationDecision(checkAuthorities(exchange, auth, requestPath))).defaultIfEmpty(new AuthorizationDecision(false));
     }
@@ -84,5 +89,20 @@ public class GatewayAuthorizationManager implements ReactiveAuthorizationManager
         Object principal = auth.getPrincipal();
         log.info("用户信息:{}", principal.toString());
         return true;
+    }
+
+    /**
+     * 获取token
+     */
+    private String getToken(ServerWebExchange exchange) {
+        String tokenStr = exchange.getRequest().getHeaders().getFirst("Authorization");
+        if (StringUtils.isBlank(tokenStr)) {
+            return null;
+        }
+        String token = tokenStr.split(" ")[1];
+        if (StringUtils.isBlank(token)) {
+            return null;
+        }
+        return token;
     }
 }

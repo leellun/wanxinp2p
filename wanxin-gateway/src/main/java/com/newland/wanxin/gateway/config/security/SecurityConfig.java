@@ -1,8 +1,6 @@
 package com.newland.wanxin.gateway.config.security;
 
-import com.newland.wanxin.gateway.config.GatewayAuthorizationManager;
-import com.newland.wanxin.gateway.config.RestAccessDeniedHandler;
-import com.newland.wanxin.gateway.config.RestOAuth2AuthExceptionEntryPoint;
+import com.newland.wanxin.gateway.config.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
@@ -15,9 +13,13 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 @EnableWebFluxSecurity
 @Configuration
 public class SecurityConfig {
+
     @Bean
     public SecurityWebFilterChain webFluxSecurityFilterChain(ServerHttpSecurity http) {
-        return http.authorizeExchange()
+        return http
+//                .oauth2ResourceServer().bearerTokenConverter()
+                .authenticationManager(new JwtAuthenticationManager())
+                .authorizeExchange()
                 .pathMatchers("/uaa/druid/**", "/consumer/l/**").denyAll()
                 .pathMatchers("/uaa/**").permitAll()
                 .pathMatchers("/consumer/my/**").access(new GatewayAuthorizationManager("read", "ROLE_CONSUMER"))
