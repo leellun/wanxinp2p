@@ -69,6 +69,7 @@ public class ClientDefaultAccessTokenConverter implements AccessTokenConverter {
 
     public static final String CLIENT_AUTHORITIES = "client_authorities";
 
+    @Override
     public Map<String, ?> convertAccessToken(OAuth2AccessToken token, OAuth2Authentication authentication) {
         Map<String, Object> response = new HashMap<String, Object>();
         OAuth2Request clientToken = authentication.getOAuth2Request();
@@ -113,6 +114,7 @@ public class ClientDefaultAccessTokenConverter implements AccessTokenConverter {
         return response;
     }
 
+    @Override
     public OAuth2AccessToken extractAccessToken(String value, Map<String, ?> map) {
         DefaultOAuth2AccessToken token = new DefaultOAuth2AccessToken(value);
         Map<String, Object> info = new HashMap<String, Object>(map);
@@ -131,6 +133,7 @@ public class ClientDefaultAccessTokenConverter implements AccessTokenConverter {
         return token;
     }
 
+    @Override
     public OAuth2Authentication extractAuthentication(Map<String, ?> map) {
         Map<String, String> parameters = new HashMap<String, String>();
         Set<String> scope = extractScope(map);
