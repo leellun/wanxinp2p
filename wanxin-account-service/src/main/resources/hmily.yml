@@ -27,7 +27,7 @@ hmily:
 repository:
   database:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url : jdbc:mysql://192.168.100.100:32545/hmily?useUnicode=true&characterEncoding=utf8
+    url : jdbc:mysql://192.168.100.100:32523/hmily?useUnicode=true&characterEncoding=utf8
     username: root
     password: wanxinp2p
     maxActive: 20

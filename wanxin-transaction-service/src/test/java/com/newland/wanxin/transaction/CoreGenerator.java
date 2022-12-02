@@ -29,7 +29,7 @@ public class CoreGenerator {
 
         // 3、数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://192.168.100.100:32545/p2p_transaction_0?serverTimezone=GMT%2B8&characterEncoding=utf-8");
+        dsc.setUrl("jdbc:mysql://192.168.100.100:32523/p2p_transaction_0?serverTimezone=GMT%2B8&characterEncoding=utf-8");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("wanxinp2p");

@@ -1,7 +1,7 @@
 server:
-  port: 9000
+  port: 8080
 spring:
-  profiles: dev
+  profiles: prod
   cloud:
     nacos:
       discovery:
@@ -20,7 +20,7 @@ spring:
       probability: 1
 
   datasource:
-    url: jdbc:mysql://192.168.100.100:32523/p2p_uaa?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://mysql-hcg4:3306/p2p_uaa?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
     password: wanxinp2p
     driver-class-name: com.mysql.cj.jdbc.Driver

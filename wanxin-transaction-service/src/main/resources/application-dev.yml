@@ -13,7 +13,7 @@ spring:
       ds0:
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://192.168.100.100:32545/p2p_transaction_0?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+        url: jdbc:mysql://192.168.100.100:32523/p2p_transaction_0?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
         username: root
         password: wanxinp2p
         initial-size: 10
@@ -34,7 +34,7 @@ spring:
       ds1:
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://192.168.100.100:32545/p2p_transaction_1?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+        url: jdbc:mysql://192.168.100.100:32523/p2p_transaction_1?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
         username: root
         password: wanxinp2p
         connectionTestQuery: SELECT 1 FROM DUAL
