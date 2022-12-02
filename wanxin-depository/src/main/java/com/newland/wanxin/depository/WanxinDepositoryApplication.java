@@ -8,10 +8,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @SpringBootApplication
 @EnableDiscoveryClient
 @MapperScan("com.newland.wanxin.depository.mapper")
-public class Wanxinp2pDepositoryApplication {
+public class WanxinDepositoryApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Wanxinp2pDepositoryApplication.class, args);
+        SpringApplication.run(WanxinDepositoryApplication.class, args);
     }
 
 }

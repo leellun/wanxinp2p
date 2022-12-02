@@ -61,3 +61,5 @@ mybatis-plus:
 
 swagger:
   enable: true
+depository:
+  url: http://localhost:8002
