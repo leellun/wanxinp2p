@@ -52,11 +52,6 @@ public class GatewayAuthorizationManager implements ReactiveAuthorizationManager
         if (permitAll(requestPath)) {
             return Mono.just(new AuthorizationDecision(true));
         }
-//        String token = getToken(exchange);
-//        if(token!=null){
-//            return Mono.just(new AuthorizationDecision(true));
-//        }
-
         return authenticationMono.map(auth -> new AuthorizationDecision(checkAuthorities(exchange, auth, requestPath))).defaultIfEmpty(new AuthorizationDecision(false));
     }
 
