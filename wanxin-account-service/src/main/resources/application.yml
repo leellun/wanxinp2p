@@ -8,3 +8,9 @@ spring:
     active: dev
 logging:
   config: classpath:logback-spring.xml
+
+wanxin:
+  security:
+    permitUrls:
+      - /l/accounts/session
+      - /l/accounts

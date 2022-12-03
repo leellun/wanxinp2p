@@ -12,7 +12,7 @@
     <dependencies>
         <dependency>
             <groupId>com.newland.wanxin</groupId>
-            <artifactId>wanxin-commons</artifactId>
+            <artifactId>wanxin-api</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>

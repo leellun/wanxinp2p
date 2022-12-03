@@ -11,5 +11,7 @@
     <modules>
         <module>wanxin-starter-openfeign</module>
         <module>wanxin-starter-redis</module>
+        <module>swagger-spring-boot-starter</module>
+        <module>wanxin-starter-security</module>
     </modules>
 </project>

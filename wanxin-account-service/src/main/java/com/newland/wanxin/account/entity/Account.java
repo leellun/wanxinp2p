@@ -48,7 +48,7 @@ public class Account implements Serializable {
 
     @ApiModelProperty(value = "账号状态")
     @TableField("STATUS")
-    private Boolean status;
+    private Integer status;
 
     @TableField("DOMAIN")
     private String domain;

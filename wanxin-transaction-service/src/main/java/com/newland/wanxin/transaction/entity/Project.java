@@ -88,7 +88,7 @@ public class Project implements Serializable {
 
     @ApiModelProperty(value = "可用状态")
     @TableField("STATUS")
-    private Boolean status;
+    private Integer status;
 
     @ApiModelProperty(value = "是否是债权出让标")
     @TableField("IS_ASSIGNMENT")

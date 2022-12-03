@@ -55,7 +55,7 @@ public class DepositoryRecord implements Serializable {
 
     @ApiModelProperty(value = "是否是同步调用")
     @TableField("IS_SYN")
-    private Boolean syn;
+    private Integer syn;
 
     @ApiModelProperty(value = "数据同步状态")
     @TableField("REQUEST_STATUS")

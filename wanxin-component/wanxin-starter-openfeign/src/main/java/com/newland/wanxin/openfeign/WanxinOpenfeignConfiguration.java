@@ -1,5 +1,6 @@
 package com.newland.wanxin.openfeign;
 
+import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,5 +10,6 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ComponentScan
+@EnableHystrix
 public class WanxinOpenfeignConfiguration {
 }

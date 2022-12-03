@@ -2,11 +2,11 @@ package com.newland.wanxin.consumer.controller;
 
 
 import com.alibaba.fastjson.JSON;
+import com.newland.newland.security.utils.SecurityUtil;
 import com.newland.wanxin.api.consumer.ConsumerAPI;
 import com.newland.wanxin.api.consumer.model.*;
 import com.newland.wanxin.api.depository.GatewayRequest;
 import com.newland.wanxin.consumer.service.ConsumerService;
-import com.newland.wanxin.consumer.utils.SecurityUtil;
 import com.newland.wanxin.domain.RestResponse;
 import com.newland.wanxin.utils.EncryptUtil;
 import io.swagger.annotations.Api;

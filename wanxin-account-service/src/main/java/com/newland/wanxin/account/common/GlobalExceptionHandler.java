@@ -45,6 +45,7 @@ public class GlobalExceptionHandler {
 		}
 
 		log.error("【系统异常】" + e.getMessage());
+		e.printStackTrace();
 		return  new RestResponse<Nullable>(CommonErrorCode.UNKOWN.getCode(), CommonErrorCode.UNKOWN.getDesc());
 	}
 

@@ -1,6 +1,8 @@
 package com.newland.wanxin.gateway.filter;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.newland.wanxin.api.account.model.LoginUser;
 import com.newland.wanxin.utils.EncryptUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.MapUtils;
@@ -52,15 +54,14 @@ public class GatewayFilterConfig implements GlobalFilter, Ordered {
         try {
             oAuth2AccessToken = tokenStore.readAccessToken(token);
             Map<String, Object> additionalInformation = oAuth2AccessToken.getAdditionalInformation();
-            //取出用户身份信息
-            String principal = MapUtils.getString(additionalInformation, "user_name");
             //获取用户权限
             List<String> authorities = (List<String>) additionalInformation.get("authorities");
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("principal", principal);
-            jsonObject.put("authorities", authorities);
+            LoginUser loginUser=new LoginUser();
+            loginUser.setUsername(MapUtils.getString(additionalInformation, "user_name"));
+            loginUser.setMobile(MapUtils.getString(additionalInformation, "mobile"));
+            loginUser.setUserAuthorities(authorities);
             //给header里面添加值
-            String base64 = EncryptUtil.encodeUTF8StringBase64(jsonObject.toJSONString());
+            String base64 = EncryptUtil.encodeUTF8StringBase64(JSON.toJSONString(loginUser));
             ServerHttpRequest tokenRequest = exchange.getRequest().mutate().header("json-token", base64).build();
             ServerWebExchange build = exchange.mutate().request(tokenRequest).build();
             return chain.filter(build);

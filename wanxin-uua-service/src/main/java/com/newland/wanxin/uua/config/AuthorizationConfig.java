@@ -1,26 +1,18 @@
 package com.newland.wanxin.uua.config;
 
-import com.newland.wanxin.uua.convert.ClientDefaultAccessTokenConverter;
-import com.newland.wanxin.uua.convert.OAuthUserApprovalHandler;
-import com.newland.wanxin.uua.convert.UnifiedUserAuthenticationConverter;
-import com.newland.wanxin.uua.exception.RestOAuth2WebResponseExceptionTranslator;
-import com.newland.wanxin.uua.service.OAuthService;
-import com.newland.wanxin.uua.service.impl.CustomJdbcClientDetailsService;
+import com.newland.wanxin.uua.provider.ClientUserAuthenticationConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
-import org.springframework.security.oauth2.common.OAuth2AccessToken;
-import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.OAuth2RequestFactory;
+import org.springframework.security.oauth2.provider.approval.TokenStoreUserApprovalHandler;
 import org.springframework.security.oauth2.provider.approval.UserApprovalHandler;
+import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.request.DefaultOAuth2RequestFactory;
@@ -51,9 +43,6 @@ public class AuthorizationConfig {
     @Autowired
     @Qualifier("jdbcClientDetailsService")
     private ClientDetailsService clientDetailsService;
-    @Autowired
-    private OAuthService oauthService;
-
     @Bean
     public TokenStore tokenStore() {
         return new JwtTokenStore(accessTokenConverter());
@@ -63,11 +52,15 @@ public class AuthorizationConfig {
     public JwtAccessTokenConverter accessTokenConverter() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
         converter.setSigningKey(SIGNING_KEY);
-        ClientDefaultAccessTokenConverter accessTokenConverter = new ClientDefaultAccessTokenConverter();
-        accessTokenConverter.setUserTokenConverter(new UnifiedUserAuthenticationConverter());
+        DefaultAccessTokenConverter accessTokenConverter=new DefaultAccessTokenConverter();
+        DefaultUserAuthenticationConverter userAuthenticationConverter=new ClientUserAuthenticationConverter();
+        accessTokenConverter.setUserTokenConverter(userAuthenticationConverter);
         converter.setAccessTokenConverter(accessTokenConverter);
+//        ClientDefaultAccessTokenConverter accessTokenConverter = new ClientDefaultAccessTokenConverter();
+//        accessTokenConverter.setUserTokenConverter(new UnifiedUserAuthenticationConverter());
         return converter;
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -75,8 +68,8 @@ public class AuthorizationConfig {
 
     @Bean("jdbcClientDetailsService")
     public ClientDetailsService clientDetailsService(DataSource dataSource) {
-        ClientDetailsService clientDetailsService = new CustomJdbcClientDetailsService(dataSource);
-        ((CustomJdbcClientDetailsService) clientDetailsService).setPasswordEncoder(passwordEncoder());
+        JdbcClientDetailsService clientDetailsService = new JdbcClientDetailsService(dataSource);
+        clientDetailsService.setPasswordEncoder(passwordEncoder());
         return clientDetailsService;
     }
 
@@ -109,31 +102,18 @@ public class AuthorizationConfig {
 
 
     @Bean
-    public UserApprovalHandler userApprovalHandler() {
-        OAuthUserApprovalHandler userApprovalHandler = new OAuthUserApprovalHandler();
-        userApprovalHandler.setOauthService(oauthService);
-        userApprovalHandler.setTokenStore(tokenStore);
-        userApprovalHandler.setClientDetailsService(this.clientDetailsService);
-        userApprovalHandler.setRequestFactory(oAuth2RequestFactory());
-        return userApprovalHandler;
+    public UserApprovalHandler userApprovalHandler(OAuth2RequestFactory requestFactory) {
+        TokenStoreUserApprovalHandler tokenStoreUserApprovalHandler = new TokenStoreUserApprovalHandler();
+        tokenStoreUserApprovalHandler.setRequestFactory(requestFactory);
+        tokenStoreUserApprovalHandler.setTokenStore(tokenStore);
+        tokenStoreUserApprovalHandler.setClientDetailsService(clientDetailsService);
+
+        return tokenStoreUserApprovalHandler;
     }
+
     @Bean
     public TokenEnhancer tokenEnhancer() {
         return (accessToken, authentication) -> {
-            /*if (accessToken instanceof DefaultOAuth2AccessToken){
-                if( authentication.getPrincipal() instanceof UnifiedUserDetails){
-                    UnifiedUserDetails unifiedUserDetails =(UnifiedUserDetails) authentication.getPrincipal();
-                    DefaultOAuth2AccessToken token= (DefaultOAuth2AccessToken) accessToken;
-                    Map<String, Object> additionalInformation = new LinkedHashMap<String, Object>();
-                    additionalInformation.put("mobile",unifiedUserDetails.getMobile());
-                    additionalInformation.put("tenant_id",unifiedUserDetails.getTenantId());
-                    additionalInformation.put("department_id",unifiedUserDetails.getDepartmentId());
-                    additionalInformation.put("user_authorities",unifiedUserDetails.getUserAuthorities());
-                    token.setAdditionalInformation(additionalInformation);
-
-                }
-
-            }*/
             DefaultOAuth2AccessToken token = (DefaultOAuth2AccessToken) accessToken;
             Map<String, Object> additionalInformation = new LinkedHashMap<String, Object>();
             additionalInformation.put("code", 0);

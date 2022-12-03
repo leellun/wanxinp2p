@@ -2,8 +2,6 @@
 package com.newland.wanxin.enumeration;
 
 
-import com.newland.wanxin.enumeration.ErrorCode;
-
 /**
  * 异常编码 0成功、-1熔断、 -2 标准参数校验不通过 -3会话超时
  * 前两位:服务标识
