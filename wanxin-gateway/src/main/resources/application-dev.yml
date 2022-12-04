@@ -29,6 +29,12 @@ spring:
             - Path=/account/**
           filters:
             - RewritePath=/account/(?<segment>/?.*),/$\{segment}
+        - id: wanxin-transaction-service
+          uri: lb://wanxin-transaction-service
+          predicates:
+            - Path=/transaction/**
+          filters:
+            - RewritePath=/transaction/(?<segment>/?.*),/$\{segment}
   zipkin:
     base-url: http://192.168.100.100:32239
     sender:

@@ -1,5 +1,5 @@
 spring:
   application:
-    name: wanxin-repayment-service
+    name: wanxin-transaction-service
   profiles:
     active: dev

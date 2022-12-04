@@ -44,6 +44,7 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
     @Override
     public void getSMSCode(String mobile) {
         String code = IdentifyCodeUtils.getSmsCode();
+        System.out.println(code);
         cache.set(mobile, code, WanxinConstant.CODE_EXPIRE_TIME);
     }
 

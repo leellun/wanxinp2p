@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 @FeignClient(value = "depository-agent-service")
 public interface DepositoryAgentApiAgent {
 
-    @PostMapping(value = "/depository-agent/l/createProject")
+    @PostMapping(value = "/l/createProject")
     public RestResponse<String> createProject(ProjectDTO projectDTO);
 
-    @PostMapping("/depository-agent/l/user-auto-pre-transaction")
+    @PostMapping("/l/user-auto-pre-transaction")
     RestResponse<String> userAutoPreTransaction(
             UserAutoPreTransactionRequest userAutoPreTransactionRequest);
 
-    @PostMapping("/depository-agent/l/confirm-loan")
+    @PostMapping("/l/confirm-loan")
     RestResponse<String> confirmLoan(LoanRequest loanRequest);
 
-    @PostMapping("/depository-agent/l/modify-project-status")
+    @PostMapping("/l/modify-project-status")
     RestResponse<String> modifyProjectStatus(ModifyProjectStatusDTO modifyProjectStatusDTO);
 }

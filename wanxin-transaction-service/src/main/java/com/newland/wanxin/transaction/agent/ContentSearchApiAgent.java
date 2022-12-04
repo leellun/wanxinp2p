@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(value = "content-search-service")
+@FeignClient(value = "wanxin-content-search-service")
 public interface ContentSearchApiAgent {
-    @PostMapping(value = "/content-search/l/projects/indexes/q")
+    @PostMapping(value = "/l/projects/indexes/q")
     RestResponse<PageVO<ProjectDTO>> queryProjectIndex(
             @RequestBody ProjectQueryDTO projectQueryParamsDTO,
             @RequestParam(value = "pageNo") Integer pageNo,

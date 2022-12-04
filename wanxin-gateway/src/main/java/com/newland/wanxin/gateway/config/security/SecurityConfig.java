@@ -4,6 +4,7 @@ import com.newland.wanxin.gateway.config.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
@@ -25,8 +26,10 @@ public class SecurityConfig {
         return http
                 .authorizeExchange()
                 .pathMatchers("/uaa/druid/**", "/consumer/l/**").denyAll()
+                .pathMatchers(HttpMethod.OPTIONS).permitAll()
                 .pathMatchers("/*/swagger-ui.html", "/*/webjars/**", "/*/swagger-resources/**", "/*/v2/*", "/*/csrf", "/*/").permitAll()
                 .pathMatchers("/uaa/**").permitAll()
+                .pathMatchers("/account/**").permitAll()
                 .pathMatchers("/consumer/my/**").access(new GatewayAuthorizationManager("read", "ROLE_CONSUMER"))
                 .pathMatchers("/consumer/m/**").access(new GatewayAuthorizationManager("read", "ROLE_ADMIN"))
                 .pathMatchers("/consumer/**").permitAll()

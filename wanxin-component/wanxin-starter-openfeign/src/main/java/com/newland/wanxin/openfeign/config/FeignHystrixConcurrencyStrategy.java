@@ -13,6 +13,7 @@ import com.netflix.hystrix.strategy.properties.HystrixPropertiesStrategy;
 import com.netflix.hystrix.strategy.properties.HystrixProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -28,6 +29,7 @@ import java.util.concurrent.TimeUnit;
  * Date: 2022/10/16 15:34:58
  */
 @Component
+@ConditionalOnProperty(prefix = "hystrix.command.default.execution.isolation",name = "strategy",havingValue = "com.newland.wanxin.openfeign.config.FeignHystrixConcurrencyStrategy")
 public class FeignHystrixConcurrencyStrategy extends HystrixConcurrencyStrategy {
 
     private static final Logger log = LoggerFactory.getLogger(FeignHystrixConcurrencyStrategy.class);

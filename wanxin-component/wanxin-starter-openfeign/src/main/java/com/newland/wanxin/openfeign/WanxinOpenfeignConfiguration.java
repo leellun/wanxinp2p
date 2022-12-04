@@ -1,5 +1,7 @@
 package com.newland.wanxin.openfeign;
 
+import com.newland.wanxin.openfeign.properties.FeignProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -11,5 +13,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan
 @EnableHystrix
+@EnableConfigurationProperties(value = FeignProperties.class)
 public class WanxinOpenfeignConfiguration {
 }

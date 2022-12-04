@@ -61,22 +61,14 @@ mybatis-plus:
       id-type: auto
 
 sms:
-  enable: false
+  enable: true
 
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          strategy: com.newland.wanxin.openfeign.config.FeignHystrixConcurrencyStrategy
 feign:
   client:
     config:
       default:
         connect-timeout: 10000
         read-timeout: 10000
-  hystrix:
-    enabled: true
 
 wanxin:
   swagger2:

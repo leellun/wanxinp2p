@@ -9,3 +9,4 @@ wanxin:
     permitUrls:
       - /l/accounts/session
       - /l/accounts
+      - /**/**

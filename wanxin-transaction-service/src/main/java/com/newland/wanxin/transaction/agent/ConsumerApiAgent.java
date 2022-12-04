@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
         */
 @FeignClient(value = "consumer-service")
 public interface ConsumerApiAgent {
-    @GetMapping("/consumer/l/currConsumer/{mobile}")
+    @GetMapping("/l/currConsumer/{mobile}")
     RestResponse<ConsumerDTO> getCurrConsumer(@PathVariable("mobile") String mobile);
 
-    @GetMapping("/consumer/l/balances/{userNo}")
+    @GetMapping("/l/balances/{userNo}")
     RestResponse<BalanceDetailsDTO> getBalance(@PathVariable("userNo")
                                                               String userNo);
 }

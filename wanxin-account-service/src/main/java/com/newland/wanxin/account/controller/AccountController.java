@@ -33,7 +33,7 @@ public class AccountController implements AccountAPI {
     @ApiOperation("获取手机验证码")
     @ApiImplicitParam(name = "mobile", value = "手机号", dataType = "String")
     @GetMapping("/sms/{mobile}")
-    public RestResponse getSMSCode(String mobile) {
+    public RestResponse getSMSCode(@PathVariable("mobile") String mobile) {
         accountService.getSMSCode(mobile);
         return RestResponse.success();
     }
