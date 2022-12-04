@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 @FeignClient(value = "wanxin-account-service")
 public interface AccountApiAgent {
 
-    @PostMapping(value = "/account/l/accounts/session")
+    @PostMapping(value = "/l/accounts/session")
     RestResponse<AccountDTO> login(@RequestBody AccountLoginDTO accountLoginDTO);
 }

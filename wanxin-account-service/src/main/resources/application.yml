@@ -1,6 +1,3 @@
-server:
-  servlet:
-    context-path: /account
 spring:
   application:
     name: wanxin-account-service

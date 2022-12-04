@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -33,6 +34,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new AuthenticationFilter();
     }
 
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/swagger-ui.html", "/webjars/**", "/swagger-resources/**", "/v2/*", "/csrf", "/");
+    }
+
     /**
      * 请求配置
      */
@@ -41,8 +47,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(authenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .csrf().disable();
         if (securityProperties.getPermitUrls() != null && securityProperties.getPermitUrls().length > 0) {
-            http.authorizeRequests().antMatchers(securityProperties.getPermitUrls()).permitAll();
-        } else {
+            http.authorizeRequests().antMatchers(securityProperties.getPermitUrls()).permitAll().anyRequest().authenticated();
+        }else{
             http.authorizeRequests().anyRequest().authenticated();
         }
         http.exceptionHandling()
@@ -50,6 +56,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint())
                 .and().headers().cacheControl().disable();
     }
-
 
 }

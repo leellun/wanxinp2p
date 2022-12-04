@@ -3,9 +3,10 @@ package com.newland.wanxin.swagger2.properties;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "swagger2")
+@ConfigurationProperties(prefix = "wanxin.swagger2")
 @Data
 public class SwaggerProperties {
+    private Boolean enable;
     private String version;
     private String title;
     private String basePackage;

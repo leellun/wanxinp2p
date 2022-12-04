@@ -23,6 +23,12 @@ spring:
             - Path=/consumer/**
           filters:
             - RewritePath=/consumer/(?<segment>/?.*),/$\{segment}
+        - id: wanxin-account-service
+          uri: lb://wanxin-account-service
+          predicates:
+            - Path=/account/**
+          filters:
+            - RewritePath=/account/(?<segment>/?.*),/$\{segment}
   zipkin:
     base-url: http://192.168.100.100:32239
     sender:

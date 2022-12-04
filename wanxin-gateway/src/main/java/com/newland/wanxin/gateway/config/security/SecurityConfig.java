@@ -25,6 +25,7 @@ public class SecurityConfig {
         return http
                 .authorizeExchange()
                 .pathMatchers("/uaa/druid/**", "/consumer/l/**").denyAll()
+                .pathMatchers("/*/swagger-ui.html", "/*/webjars/**", "/*/swagger-resources/**", "/*/v2/*", "/*/csrf", "/*/").permitAll()
                 .pathMatchers("/uaa/**").permitAll()
                 .pathMatchers("/consumer/my/**").access(new GatewayAuthorizationManager("read", "ROLE_CONSUMER"))
                 .pathMatchers("/consumer/m/**").access(new GatewayAuthorizationManager("read", "ROLE_ADMIN"))

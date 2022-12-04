@@ -2,20 +2,13 @@ package com.newland.wanxin.gateway.config;
 
 import com.alibaba.nacos.common.utils.ConcurrentHashSet;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authorization.AuthorizationDecision;
 import org.springframework.security.authorization.ReactiveAuthorizationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
-import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.web.server.authorization.AuthorizationContext;
-import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
-import org.springframework.util.PathMatcher;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
@@ -86,18 +79,4 @@ public class GatewayAuthorizationManager implements ReactiveAuthorizationManager
         return true;
     }
 
-    /**
-     * 获取token
-     */
-    private String getToken(ServerWebExchange exchange) {
-        String tokenStr = exchange.getRequest().getHeaders().getFirst("Authorization");
-        if (StringUtils.isBlank(tokenStr)) {
-            return null;
-        }
-        String token = tokenStr.split(" ")[1];
-        if (StringUtils.isBlank(token)) {
-            return null;
-        }
-        return token;
-    }
 }

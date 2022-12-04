@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2022-11-19
  */
 @RestController
+@RequestMapping
 @Api(value = "统一账户服务的API")
 public class AccountController implements AccountAPI {
     @Autowired

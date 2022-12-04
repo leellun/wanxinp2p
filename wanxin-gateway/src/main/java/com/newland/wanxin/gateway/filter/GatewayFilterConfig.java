@@ -15,6 +15,7 @@ import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.common.exceptions.InvalidTokenException;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -34,43 +35,41 @@ public class GatewayFilterConfig implements GlobalFilter, Ordered {
     @Autowired
     private TokenStore tokenStore;
 
+    public static void main(String[] args) {
+        AntPathMatcher pathMatcher = new AntPathMatcher();
+        System.out.println(pathMatcher.match("/swagger**/**", "/swagger-resources/configuration/ui"));
+    }
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         String requestUrl = exchange.getRequest().getPath().value();
         AntPathMatcher pathMatcher = new AntPathMatcher();
         System.out.println(requestUrl);
-        //1 uaa服务所有放行
-        if (pathMatcher.match("/uaa/**", requestUrl)) {
-            return chain.filter(exchange);
-        }
         //2 检查token是否存在
         String token = getToken(exchange);
         if (StringUtils.isBlank(token)) {
-            return noTokenMono(exchange);
+            return chain.filter(exchange);
+        } else {
+            try {
+                //3 判断是否是有效的token
+                OAuth2AccessToken oAuth2AccessToken = tokenStore.readAccessToken(token);
+                Map<String, Object> additionalInformation = oAuth2AccessToken.getAdditionalInformation();
+                //获取用户权限
+                List<String> authorities = (List<String>) additionalInformation.get("authorities");
+                LoginUser loginUser = new LoginUser();
+                loginUser.setUsername(MapUtils.getString(additionalInformation, "user_name"));
+                loginUser.setMobile(MapUtils.getString(additionalInformation, "mobile"));
+                loginUser.setUserAuthorities(authorities);
+                //给header里面添加值
+                String base64 = EncryptUtil.encodeUTF8StringBase64(JSON.toJSONString(loginUser));
+                ServerHttpRequest tokenRequest = exchange.getRequest().mutate().header("json-token", base64).build();
+                ServerWebExchange build = exchange.mutate().request(tokenRequest).build();
+                return chain.filter(build);
+            } catch (InvalidTokenException e) {
+                log.info("无效的token: {}", token);
+                return chain.filter(exchange);
+            }
         }
-        //3 判断是否是有效的token
-        OAuth2AccessToken oAuth2AccessToken;
-        try {
-            oAuth2AccessToken = tokenStore.readAccessToken(token);
-            Map<String, Object> additionalInformation = oAuth2AccessToken.getAdditionalInformation();
-            //获取用户权限
-            List<String> authorities = (List<String>) additionalInformation.get("authorities");
-            LoginUser loginUser=new LoginUser();
-            loginUser.setUsername(MapUtils.getString(additionalInformation, "user_name"));
-            loginUser.setMobile(MapUtils.getString(additionalInformation, "mobile"));
-            loginUser.setUserAuthorities(authorities);
-            //给header里面添加值
-            String base64 = EncryptUtil.encodeUTF8StringBase64(JSON.toJSONString(loginUser));
-            ServerHttpRequest tokenRequest = exchange.getRequest().mutate().header("json-token", base64).build();
-            ServerWebExchange build = exchange.mutate().request(tokenRequest).build();
-            return chain.filter(build);
-        } catch (InvalidTokenException e) {
-            log.info("无效的token: {}", token);
-            return invalidTokenMono(exchange);
-        }
-
-
     }
 
 
@@ -99,14 +98,6 @@ public class GatewayFilterConfig implements GlobalFilter, Ordered {
         json.put("data", "无效的token");
         return buildReturnMono(json, exchange);
     }
-
-    private Mono<Void> noTokenMono(ServerWebExchange exchange) {
-        JSONObject json = new JSONObject();
-        json.put("status", HttpStatus.UNAUTHORIZED.value());
-        json.put("data", "没有token");
-        return buildReturnMono(json, exchange);
-    }
-
 
     private Mono<Void> buildReturnMono(JSONObject json, ServerWebExchange exchange) {
         ServerHttpResponse response = exchange.getResponse();

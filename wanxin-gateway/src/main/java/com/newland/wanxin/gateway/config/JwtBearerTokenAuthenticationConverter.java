@@ -6,6 +6,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -45,7 +46,8 @@ public class JwtBearerTokenAuthenticationConverter implements ServerAuthenticati
                         throw new OAuth2AuthenticationException(error);
                     }
                     OAuth2AccessToken oAuth2AccessToken = tokenStore.readAccessToken(token);
-                    return new JwtTokenAuthenticationToken(token, oAuth2AccessToken);
+                    Authentication authentication = new JwtTokenAuthenticationToken(token, oAuth2AccessToken);
+                    return authentication;
                 });
     }
 
