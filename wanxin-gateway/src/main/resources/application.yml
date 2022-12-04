@@ -3,5 +3,3 @@ spring:
     name: gateway-server
   profiles:
     active: dev
-logging:
-  config: classpath:logback-spring.xml

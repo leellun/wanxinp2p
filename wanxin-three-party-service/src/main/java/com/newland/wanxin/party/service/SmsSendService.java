@@ -6,6 +6,7 @@ import com.github.qcloudsms.SmsSingleSenderResult;
 import com.github.qcloudsms.httpclient.HTTPException;
 import com.newland.wanxin.domain.RestResponse;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
@@ -14,6 +15,7 @@ import java.io.IOException;
  * Author: leell
  * Date: 2022/11/21 22:40:17
  */
+@Service
 public class SmsSendService {
     @Value("${sms.qcloud.appId}")
     private int appId;

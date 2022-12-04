@@ -1,6 +1,6 @@
 
 server:
-  port: 8002
+  port: 8003
 
 spring:
   profiles: dev
@@ -49,5 +49,17 @@ mybatis-plus:
     db-config:
       id-type: auto
 
-swagger:
-  enable: true
+depository:
+  privateKey: MIIBVAIBADANBgkqhkiG9w0BAQEFAASCAT4wggE6AgEAAkEApkqNoES+508OiULK5UIEuZ9WxIUG7fB92V0vEi1FyNJgzMc2gi5hy8eGcyYyLWJdEt5h1vC8jclCgEcMY3lp3QIDAQABAkAUhQia6UDBXEEH8QUGazIYEbBsSZoETHPLGbOQQ6Pj1tb6CVC57kioBjwtNBnY2jBDWi5K815LnOBcJSSjJPwhAiEA2eO6VZMTkdjQAkpB5dhy/0C3i8zs0c0M1rPoTA/RpkUCIQDDYHJPqHLkQyd//7sEeYcm8cMBTvDKBXyiuGk8eLRauQIgQo6IlalGmg+Dgp+SP5Z9kjD/oCmp0XB0UoVEGS/f140CIQCsG9YXHgi31ACD3T9eHcBVKjvidyveix7UKSdrQdl+4QIgNCtRVLV+783e7PX5hRXD+knsWTQxDEMEsHi1KsAWtPk=
+
+wanxin:
+  swagger2:
+    enable: true
+    base-package: com.newland.wanxin.depository
+    title: 万信金融P2P平台-银行存管系统API文档
+    description: 银行存管系统api
+    version: 1.0.0
+    concat:
+      name: leellun
+      email: leellun@sina.cn
+      url: leellun.github.io

@@ -22,9 +22,6 @@ import javax.servlet.http.HttpServletResponse;
 @ControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
-
-	private final static Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
-
 	@ExceptionHandler(value = Exception.class)
 	@ResponseBody
 	public RestResponse<Nullable> exceptionGet(HttpServletRequest req, HttpServletResponse response , Exception e) {

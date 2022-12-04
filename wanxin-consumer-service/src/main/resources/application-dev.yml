@@ -59,7 +59,32 @@ mybatis-plus:
     db-config:
       id-type: auto
 
-swagger:
-  enable: true
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: com.newland.wanxin.openfeign.config.FeignHystrixConcurrencyStrategy
+feign:
+  client:
+    config:
+      default:
+        connect-timeout: 10000
+        read-timeout: 10000
+  hystrix:
+    enabled: true
+
+wanxin:
+  swagger2:
+    enable: true
+    base-package: com.newland.wanxin.consumer
+    title: 万信金融P2P平台-用户服务API文档
+    description: 包含用户服务api
+    version: 1.0.0
+    concat:
+      name: leellun
+      email: leellun@sina.cn
+      url: leellun.github.io
+
 depository:
   url: http://localhost:8002

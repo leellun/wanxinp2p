@@ -63,12 +63,27 @@ mybatis-plus:
 sms:
   enable: false
 
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: com.newland.wanxin.openfeign.config.FeignHystrixConcurrencyStrategy
+feign:
+  client:
+    config:
+      default:
+        connect-timeout: 10000
+        read-timeout: 10000
+  hystrix:
+    enabled: true
+
 wanxin:
   swagger2:
     enable: true
     base-package: com.newland.wanxin.account
-    title: 万信金融P2P平台-用户服务API文档
-    description: 包含用户服务api
+    title: 万信金融P2P平台-账户服务API文档
+    description: 包含统一账户服务api
     version: 1.0.0
     concat:
       name: leellun

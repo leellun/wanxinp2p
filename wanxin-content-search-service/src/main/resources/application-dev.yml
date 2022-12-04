@@ -1,6 +1,6 @@
 
 server:
-  port: 8001
+  port: 8002
 
 spring:
   profiles: dev
@@ -42,9 +42,18 @@ mybatis-plus:
     db-config:
       id-type: auto
 
-swagger:
-  enable: true
-
 wanxinp2p:
   es:
     index: projectvo
+
+wanxin:
+  swagger2:
+    enable: true
+    base-package: com.newland.wanxin.search
+    title: 万信金融P2P平台-检索服务API文档
+    description: 包含检索服务api
+    version: 1.0.0
+    concat:
+      name: leellun
+      email: leellun@sina.cn
+      url: leellun.github.io

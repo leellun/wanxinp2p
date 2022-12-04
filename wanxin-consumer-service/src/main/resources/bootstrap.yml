@@ -21,3 +21,5 @@ spring:
         server-addr: nacos-hs:8848
         namespace: 52a41dfb-c913-4eca-ad0c-12cc0fa4d777
         file-extension: yaml
+logging:
+  config: classpath:logback-spring.xml

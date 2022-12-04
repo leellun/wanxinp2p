@@ -4,5 +4,3 @@ spring:
     name: wanxin-depository-agent-service
   profiles:
     active: dev
-logging:
-  config: classpath:logback-spring.xml

@@ -31,7 +31,6 @@ hystrix:
       execution:
         isolation:
           strategy: com.newland.wanxin.openfeign.config.FeignHystrixConcurrencyStrategy
-
 feign:
   client:
     config:
